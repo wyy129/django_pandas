@@ -2,15 +2,6 @@ import json
 import os
 
 import matplotlib.font_manager as mf  # 导入字体管理器
-
-import matplotlib.pyplot as plt
-
-import yagmail
-from django.http import HttpResponse
-import json
-import os
-
-import matplotlib.font_manager as mf  # 导入字体管理器
 import matplotlib.pyplot as plt
 import yagmail
 from django.http import HttpResponse
@@ -155,3 +146,8 @@ def transmit_data(request):
     json_data = json.loads(request.body.decode('utf-8'))
     print(json_data)
     return HttpResponse('{"name":"ok"}')
+
+
+def login(request):
+    "你好 szf"
+    pass
