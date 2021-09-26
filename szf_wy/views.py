@@ -149,5 +149,6 @@ def transmit_data(request):
 
 
 def login(request):
-    "你好 szf"
+    " 你好 ，szf"
+
     pass
