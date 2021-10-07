@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/css/login.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div class="banxin">
+                <div class="user">
+                    <img src="./static/image/username.png" alt="" style="width: 50px;">
+                    <input type="text" v-model="username" id="username" placeholder="请输入账号" οnfοcus="this.placeholder=''" οnblur="this.placeholder='请输入账号'">
+                </div>
+                <div class="pass">
+                    <img src="./static/image/password.png" alt="" style="height: 50px;">
+                    <input type="password" v-model="password" id="password" placeholder="请输入密码" οnfοcus="this.placeholder=''" οnblur="this.placeholder='请输入密码'">
+                </div>
+                <button class="login" @click="postlogin">登录</button>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                username: "",
+                password: "",
+            },
+            methods:{
+                postlogin(){
+                    if (this.username == "") {
+                        alert("请输入账号");
+                        return 0
+                    }
+                    if (this.password == "") {
+                        alert("请输入密码");
+                        return 0
+                    }
+                    var that = this;
+                    axios(
+                        {
+                            url: 'http://127.0.0.1:8000/login',
+                            method: 'post',//get
+                            data:{
+                                username:that.username,
+                                password:that.password
+                            },
+                            headers:{'Content-Type':'multipart/form-data'}
+                         }).then(response => {
+                                console.log(response.data.msg)
+                                if (response.data.msg === 1) {
+                                    alert("登录成功");
+                                    window.location = response.data.url;
+                                }else{
+                                    alert("登录失败");
+                                }
+                        }, error => {
+                            console.log('错误', error.message)
+                        })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
