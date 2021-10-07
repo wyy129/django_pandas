@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./static/css/index.css">
+    <script src="./static/js/vue.min.js"></script>
+</head>
+
+<body>
+    <!-- 头部盒子 -->
+    <div id="app">
+        <header>
+            <h1>Echarts-可视化<span>( 石振飞-测试 )</span></h1>
+            <div class="showTime">{{ time }}</div>
+        </header>
+        <!-- 页面主题 -->
+        <section class="mainbox">
+            <div class="column">
+                <div class="panel bar">
+                    <p>柱状图-就业行业</p>
+                    <div class="chart"></div>
+                    <div class="frame1"></div>
+                    <div class="frame2"></div>
+                    <div class="frame3"></div>
+                    <div class="frame4"></div>
+                </div>
+                <div class="panel line">
+                    <p>柱状图-就业行业</p>
+                    <div class="chart">图标</div>
+                    <div class="frame1"></div>
+                    <div class="frame2"></div>
+                    <div class="frame3"></div>
+                    <div class="frame4"></div>
+                </div>
+                <div class="panel pie">
+                    <p>柱状图-就业行业</p>
+                    <div class="chart">图标</div>
+                    <div class="frame1"></div>
+                    <div class="frame2"></div>
+                    <div class="frame3"></div>
+                    <div class="frame4"></div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="no">
+                    <div class="no-hd">
+                        <ul>
+                            <li>111</li>
+                            <li>222</li>
+                        </ul>
+                    </div>
+                    <div class="no-bd">
+                        <ul>
+                            <li>前端需求人数</li>
+                            <li>市场供应人数</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="map">
+                    <div class="map1"></div>
+                    <div class="map3"></div>
+                    <div class="map2"></div>
+                    <div class="chart"></div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="panel bar2">
+                    <p>柱状图-就业行业</p>
+                    <div class="chart">图标</div>
+                    <div class="frame1"></div>
+                    <div class="frame2"></div>
+                    <div class="frame3"></div>
+                    <div class="frame4"></div>
+                </div>
+                <div class="panel line">
+                    <p>柱状图-就业行业</p>
+                    <div class="chart">图标</div>
+                    <div class="frame1"></div>
+                    <div class="frame2"></div>
+                    <div class="frame3"></div>
+                    <div class="frame4"></div>
+                </div>
+                <div class="panel pie">
+                    <p>柱状图-就业行业</p>
+                    <div class="chart">图标</div>
+                    <div class="frame1"></div>
+                    <div class="frame2"></div>
+                    <div class="frame3"></div>
+                    <div class="frame4"></div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="./static/js/flexible.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                time: "",
+            }
+        })
+        var times = function () {
+            (setInterval(function () {
+                // console.log(11);
+                let date = new Date;
+                let y = date.getFullYear();
+                let mt = date.getMonth() + 1;
+                let day = date.getDate();
+                let h = date.getHours();
+                let m = date.getMinutes();
+                let s = date.getSeconds();
+                app.time = `当前时间:` + " " + " " + y + "年" + mt + "月" + day + "-" + h + "时" + m + "分" + s + "秒";
+            }, 1000))
+        }()
+    </script>
+    <script src="./static/js/echarts.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</body>
+
+</html>

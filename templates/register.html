@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>登录界面</title>
+	<link rel="stylesheet" type="text/css" href="static/css/enroll.css">
+    <script src="./static/js/vue.js"></script>
+    <script src="./static/js/axios.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class="kuang">
+            <div class="title">
+                <p>注册</p>
+            </div>
+			<div class="username">
+                <img src="./static/img/账号.png" alt="账号" style="vertical-align: middle;">
+				<input type="text" v-model="username" id="username" placeholder="请输入账号" οnfοcus="this.placeholder=''" οnblur="this.placeholder='请输入账号'">
+			</div>
+			<div class="password">
+                <img src="./static/img/密码.png" alt="密码" style="vertical-align: middle;">
+				<input type="password" v-model="password" id="password" placeholder="请输入密码" οnfοcus="this.placeholder=''" οnblur="this.placeholder='请输入密码'">
+			</div>
+			<div class="again">
+                <img src="./static/img/确认密码.png" alt="确认密码" style="vertical-align: middle;">
+				<input type="password" v-model="again" id="again" placeholder="请输入确认密码" οnfοcus="this.placeholder=''" οnblur="this.placeholder='请输入确认密码'">
+			</div>
+			<div class="button">
+				<button @click="postlogin">注册</button>
+			</div>
+		</div>
+	</div>
+	<script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                username: "",
+                password: "",
+				again:"",
+            },
+            methods:{
+                postlogin(){
+                    if (this.username == "") {
+                        alert("请输入账号");
+                        return 0
+                    }
+                    if (this.password == "") {
+                        alert("请输入密码");
+                        return 0
+                    }
+                    if (this.again == "") {
+                        alert("请输入确认密码");
+                        return 0
+                    }
+                    if (this.again != this.password){
+                        alert("两次密码不相同，请重新输入");
+                        return 0;
+                    }
+                    var that = this;
+                    axios(
+                        {
+                            url: 'http://127.0.0.1:8000/register',
+                            method: 'post',//get
+                            data:{
+                                username:that.username,
+                                password:that.password,
+                                again:that.again
+                            },
+                            headers:{'Content-Type':'multipart/form-data'}
+                        }).then(response => {
+                                console.log(response.data.msg)
+                                if (response.data.msg === 1) {
+                                    alert("注册成功");
+                                    window.location = response.data.url;
+                                }else{
+                                    alert("注册失败");
+                                }
+                        }, error => {
+                            console.log('错误', error.message)
+                        })
+                }
+            }
+        })
+    </script>
+</body>
+</html>
