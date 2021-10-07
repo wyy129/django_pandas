@@ -24,4 +24,5 @@ import szf_wy.url
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('szf/', include(szf_wy.url)),
+    path('', include(szf_wy.url)),
 ]

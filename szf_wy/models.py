@@ -1,29 +1,28 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-
-# (self, username,
-# x,
-# y,
-# Labels
-# , filename,
-# xticklabels = False
-# , nrous-l
-# , neplsl,
-# ticks-false,
-# title-False,
-# figsize=(10, 10),
-# dpi-80,
-# grid-True,
-# Linestye=".",
-# alpha=-.5)
 
 # Create your models here.
 
 # 用户信息数据库
-class UserInformation(models.Model):
-    userid = models.CharField(max_length=30, verbose_name='用户id')
-    username = models.CharField(max_length=100, verbose_name='用户名')
-    password = models.CharField(max_length=100, verbose_name='密码')
+
+# class UserInformation(models.Model):
+#     userid = models.CharField(max_length=30, verbose_name='用户id', primary_key=True)
+#     username = models.CharField(max_length=100, verbose_name='用户名')
+#     password = models.CharField(max_length=100, verbose_name='密码')
+
+
+# class User(AbstractUser):
+#     '''定义用户模型类'''
+#     mobile = models.CharField(max_length=11, unique=True, verbose_name="手机号")
+#
+#     class Meta:
+#         db_table = 'tb_users'
+#         verbose_name = '用户'
+#         verbose_name_plural = verbose_name
+#
+#     def __str__(self):
+#         return self.username
 
 
 # 传输信息数据库
