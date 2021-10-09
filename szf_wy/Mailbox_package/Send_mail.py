@@ -6,7 +6,7 @@
 
 import yagmail
 
-from ..setting import MAILUSER, PASSWORD, HOST
+from szf_wy.setting import MAILUSER, PASSWORD, HOST
 
 
 class Mail(object):
