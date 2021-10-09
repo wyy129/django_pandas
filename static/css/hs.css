@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#app {
+  width: 1290px;
+  margin: 0 auto;
+}
+#app header {
+  height: 50px;
+  background-color: aqua;
+}
+#app header .user {
+  float: right;
+  height: 50px;
+  line-height: 50px;
+  font-size: 24px;
+}
+#app .body {
+  position: relative;
+  width: 1000px;
+  margin: 0 auto;
+  margin-top: 50px;
+}
+#app .body input {
+  width: 100px;
+  height: 30px;
+}
+#app .body span {
+  display: inline-block;
+  width: 200px;
+  font-size: 24px;
+  text-align: right;
+}
+#app .body button {
+  width: 200px;
+  height: 50px;
+  background-color: aqua;
+  position: absolute;
+  left: 40%;
+}
+#app .body #x {
+  display: inline-block;
+}
+#app .body #y {
+  display: inline-block;
+}
+#app .body #xtick {
+  display: inline-block;
+}

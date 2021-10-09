@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./static/js/vue.js"></script>
+    <script src="./static/js/axios.min.js"></script>
+    <link rel="stylesheet" href="./static/css/hs.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="user">
+                {{ username }}
+            </div>
+        </header>
+        <div class="body">
+            <span>保存文件名</span><input type="text" name="" id="" v-model="filename">
+        </div>
+        <div class="body">
+            <div class="name">
+                <span>x轴标题</span>
+                <input type="text" v-model="xtitle">
+            </div>
+            <span>x轴数据:  </span>
+            <div id="x">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+            </div>
+        </div>
+        <div class="body">
+            <div class="name">
+                <span>x轴标题</span>
+                <input type="text" v-model="ytitle">
+            </div>
+            <span>y轴数据:  </span>
+            <div id="y">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+            </div>
+        </div>
+        <div class="body">
+            <span>x轴显示文字:  </span>
+            <div id="xtick">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+            </div>
+        </div>
+        <div class="body">
+            <button @click="postdata">提交</button>
+        </div>
+    </div>
+    <script>
+        var app = new Vue({
+            el:"#app",
+            data:{
+                username:"",
+                xtitle:"",
+                ytitle:"",
+                x:[],
+                y:[],
+                xticklabels:[],
+                filename:""
+            },
+            methods: {
+                postdata(){
+                    console.log(this.xtitle, this.ytitle, );
+                    var xdata = document.querySelector("#x");
+                    var xinput = xdata.querySelectorAll("input");
+                    var ydata = document.querySelector("#y");
+                    var yinput = ydata.querySelectorAll("input");
+                    var xt = document.querySelector("#xtick");
+                    var xtinput = xt.querySelectorAll("input");
+                    console.log(11);
+                    for (let i = 0; i < xinput.length; i++) {
+                        this.x.push(xinput[i].value);
+                        // console.log(xinput[i].value);
+                        this.y.push(yinput[i].value);
+                        this.xticklabels.push(xtinput[i].value);
+                        console.log(yinput[i].value,xinput[i].value,xtinput[i].value);
+                    }
+                    console.log(this.x, this.y, this.xticklabels);
+                    var that = this
+                    axios({
+                        method:'post',
+                        url: "http://127.0.0.1:8000/transmit_data",
+                        data: {
+                            data:[
+                                [that.x, that.xtitle],
+                                [that,y, that.ytitle]
+                            ],
+                            username:that.username,
+                            filename:that.filename,
+                            xticklabels:that.xticklabels
+                        },
+                        headers:{'Content-Type':'multipart/form-data'}
+                    }).then(res=>{
+                        if (res.data.msg === 1) {
+                            alert("生成成功");
+                        }else{
+                            alert("生成失败");
+                        }
+                    },error =>{
+                        alert("请检查网路");
+                    })  
+                }
+            },
+        })
+        axios({
+            method:"get",
+            url:"http://127.0.0.1:8000/get_username",
+            headers:{'Content-Type':'multipart/form-data'}
+        }).then(res=>{
+                if (res.data.msg === 1) {
+                    app.username = res.data.username;
+                }else{
+                    app.username = "获取用户信息失败";
+                }
+                },error =>{
+                    alert("请检查网路");
+                })
+    </script>
+</body>
+</html>
