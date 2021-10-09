@@ -70,7 +70,7 @@ def transmit_data(request):
         # 调用可视化的模块 生成最后结果
         obj.run()
 
-        return JsonResponse({"msg": 1, "url": "http://127.0.0.1:8000"})
+        return JsonResponse({"msg": 1, "url": "http://127.0.0.1:8000/static/" + username + "/" + filename + ".png"})
 
 
 def index(request):
@@ -82,7 +82,7 @@ def index(request):
         if username == None:
             return HttpResponseRedirect("login")
         else:
-            return render(request, "index.html")
+            return render(request, "hs.html")
 
 
 def register(request):
@@ -110,4 +110,4 @@ def get_username(request):
     if username == "":
         return JsonResponse({"msg": "0"})
     else:
-        return JsonResponse({"msg": "1", "username": username})
+        return JsonResponse({"msg": 1, "username": username})

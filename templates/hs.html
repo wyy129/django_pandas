@@ -56,10 +56,23 @@
         </div>
     </div>
     <script>
+        axios({
+            method:"get",
+            url:"http://127.0.0.1:8000/get_username",
+            headers:{'Content-Type':'multipart/form-data'}
+        }).then(res=>{
+                if (res.data.msg === 1) {
+                    app.username = res.data.username;
+                }else{
+                    app.username = "获取用户信息失败";
+                }
+                },error =>{
+                    alert("请检查网路");
+                })
         var app = new Vue({
             el:"#app",
             data:{
-                username:"",
+                username:"1234",
                 xtitle:"",
                 ytitle:"",
                 x:[],
@@ -82,48 +95,28 @@
                         // console.log(xinput[i].value);
                         this.y.push(yinput[i].value);
                         this.xticklabels.push(xtinput[i].value);
-                        console.log(yinput[i].value,xinput[i].value,xtinput[i].value);
+                        // console.log(yinput[i].value,xinput[i].value,xtinput[i].value);
                     }
-                    console.log(this.x, this.y, this.xticklabels);
-                    var that = this
+                    // console.log(this.x, this.y, this.xticklabels);
+                    var that = this;
+                    // console.log(11);
                     axios({
-                        method:'post',
-                        url: "http://127.0.0.1:8000/transmit_data",
-                        data: {
+                        method:"post",
+                        url:"http://127.0.0.1:8000/transmit_data",
+                        data:{
+                            username:that.username,
                             data:[
                                 [that.x, that.xtitle],
-                                [that,y, that.ytitle]
+                                [that.y, that.ytitle],
                             ],
-                            username:that.username,
                             filename:that.filename,
                             xticklabels:that.xticklabels
-                        },
-                        headers:{'Content-Type':'multipart/form-data'}
-                    }).then(res=>{
-                        if (res.data.msg === 1) {
-                            alert("生成成功");
-                        }else{
-                            alert("生成失败");
                         }
-                    },error =>{
-                        alert("请检查网路");
-                    })  
+                    })
                 }
             },
         })
-        axios({
-            method:"get",
-            url:"http://127.0.0.1:8000/get_username",
-            headers:{'Content-Type':'multipart/form-data'}
-        }).then(res=>{
-                if (res.data.msg === 1) {
-                    app.username = res.data.username;
-                }else{
-                    app.username = "获取用户信息失败";
-                }
-                },error =>{
-                    alert("请检查网路");
-                })
+        
     </script>
 </body>
 </html>

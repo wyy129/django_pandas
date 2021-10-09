@@ -4,7 +4,7 @@
 # @Author: 石振飞
 # @Date  : 2021/9/25# @Desc  :
 # 默认静态地址
-PATH = "./static/"
+PATH = "./static/result/"
 
 # 服务邮箱
 MAILUSER = "1104774861@qq.com"
